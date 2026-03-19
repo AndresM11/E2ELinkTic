@@ -18,7 +18,7 @@ public class EmployeeDetailsPage {
     private final By contenedorFoto   = By.cssSelector(".employee-image-wrapper");
     private final By inputArchivo     = By.cssSelector("input[type='file']");
     private final By botonGuardarFoto = By.xpath("//button[normalize-space()='Save']");
-    private final By mensajeExito     = By.cssSelector(".oxd-toast--success");
+    private final By modalRecorte     = By.cssSelector(".oxd-dialog-container");
 
     public EmployeeDetailsPage() {
         this.driver = DriverManager.obtenerDriver();
@@ -48,6 +48,6 @@ public class EmployeeDetailsPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", boton);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", boton);
 
-        espera.until(ExpectedConditions.visibilityOfElementLocated(mensajeExito));
+        esperaModal.until(ExpectedConditions.invisibilityOfElementLocated(modalRecorte));
     }
 }
