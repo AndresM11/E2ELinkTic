@@ -17,7 +17,7 @@ public class EmployeeDetailsPage {
 
     private final By contenedorFoto   = By.cssSelector(".employee-image-wrapper");
     private final By inputArchivo     = By.cssSelector("input[type='file']");
-    private final By botonGuardarFoto = By.xpath("//button[@type='button' and normalize-space()='Save']");
+    private final By botonGuardarFoto = By.xpath("//button[normalize-space()='Save']");
     private final By mensajeExito     = By.cssSelector(".oxd-toast--success");
 
     public EmployeeDetailsPage() {
@@ -39,9 +39,13 @@ public class EmployeeDetailsPage {
         );
         input.sendKeys(rutaArchivo);
 
-        WebElement boton = espera.until(
-            ExpectedConditions.visibilityOfElementLocated(botonGuardarFoto)
+        try { Thread.sleep(2500); } catch (InterruptedException ignorado) {}
+
+        WebDriverWait esperaModal = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebElement boton = esperaModal.until(
+            ExpectedConditions.presenceOfElementLocated(botonGuardarFoto)
         );
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", boton);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", boton);
 
         espera.until(ExpectedConditions.visibilityOfElementLocated(mensajeExito));
