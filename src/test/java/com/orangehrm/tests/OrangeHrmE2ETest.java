@@ -19,7 +19,7 @@ public class OrangeHrmE2ETest extends BaseTest {
     private static final String CONTRASENA_ADMIN  = "admin123";
     private static final String NOMBRE_EMPLEADO   = "Carlos";
     private static final String APELLIDO_EMPLEADO = "Morales" + System.currentTimeMillis();
-    private static final String EMPLEADO_INEXISTENTE = "ZZZ_UsuarioFantasma_99999";
+    private static final String EMPLEADO_INEXISTENTE = "Korn";
 
     @Test(description = "Flujo E2E: crear empleado en PIM, subir foto y validar en Directory", priority = 1)
     @Severity(SeverityLevel.CRITICAL)
