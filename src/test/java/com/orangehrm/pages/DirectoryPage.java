@@ -37,10 +37,29 @@ public class DirectoryPage {
         espera.until(ExpectedConditions.elementToBeClickable(botonBuscar)).click();
     }
 
+    public void buscarNombreDirecto(String nombre) {
+        espera.until(ExpectedConditions.urlContains("directory"));
+        WebElement campo = espera.until(ExpectedConditions.elementToBeClickable(campoBusqueda));
+        campo.clear();
+        campo.sendKeys(nombre);
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(3))
+                    .until(ExpectedConditions.visibilityOfElementLocated(sugerenciaDropdown));
+        } catch (Exception ignorado) {}
+        espera.until(ExpectedConditions.elementToBeClickable(botonBuscar)).click();
+    }
+
     public boolean empleadoApareceEnResultados(String nombre) {
         List<WebElement> tarjetas = espera.until(
             ExpectedConditions.numberOfElementsToBeMoreThan(tarjetasDeEmpleado, 0)
         );
+        return tarjetas.stream()
+                .anyMatch(tarjeta -> tarjeta.getText().contains(nombre));
+    }
+
+    public boolean existeEmpleadoEnResultados(String nombre) {
+        try { Thread.sleep(2000); } catch (InterruptedException ignorado) {}
+        List<WebElement> tarjetas = driver.findElements(tarjetasDeEmpleado);
         return tarjetas.stream()
                 .anyMatch(tarjeta -> tarjeta.getText().contains(nombre));
     }
