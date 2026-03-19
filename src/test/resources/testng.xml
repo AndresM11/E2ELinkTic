@@ -4,4 +4,9 @@
     <listeners>
         <listener class-name="com.orangehrm.listeners.ScreenshotListener"/>
     </listeners>
+    <test name="Flujo de creación y validación de empleado">
+        <classes>
+            <class name="com.orangehrm.tests.OrangeHrmE2ETest"/>
+        </classes>
+    </test>
 </suite>
