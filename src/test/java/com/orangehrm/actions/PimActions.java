@@ -5,6 +5,8 @@ import com.orangehrm.pages.EmployeeDetailsPage;
 import com.orangehrm.pages.PimPage;
 import io.qameta.allure.Step;
 
+import java.util.Random;
+
 public class PimActions {
 
     private final DashboardPage dashboardPage;
@@ -24,9 +26,11 @@ public class PimActions {
 
     @Step("Crear empleado: {nombre} {apellido}")
     public void crearEmpleado(String nombre, String apellido) {
+        String idAleatorio = String.valueOf(10000 + new Random().nextInt(89999));
         pimPage.clickAgregarEmpleado();
         pimPage.ingresarNombre(nombre);
         pimPage.ingresarApellido(apellido);
+        pimPage.ingresarIdEmpleado(idAleatorio);
         pimPage.guardarEmpleado();
     }
 
