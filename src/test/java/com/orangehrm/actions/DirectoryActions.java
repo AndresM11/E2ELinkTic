@@ -32,4 +32,17 @@ public class DirectoryActions {
             "El empleado '" + nombre + "' no fue encontrado en el módulo Directory."
         );
     }
+
+    @Step("Buscar empleado inexistente: {nombre}")
+    public void buscarEmpleadoInexistente(String nombre) {
+        directoryPage.buscarNombreDirecto(nombre);
+    }
+
+    @Step("Validar que el empleado inexistente '{nombre}' aparece en los resultados")
+    public void validarEmpleadoInexistenteEnResultados(String nombre) {
+        Assert.assertTrue(
+            directoryPage.existeEmpleadoEnResultados(nombre),
+            "El empleado '" + nombre + "' no fue encontrado. No debería existir en el sistema."
+        );
+    }
 }
