@@ -21,7 +21,7 @@ public class OrangeHrmE2ETest extends BaseTest {
     private static final String APELLIDO_EMPLEADO = "Morales" + System.currentTimeMillis();
     private static final String EMPLEADO_INEXISTENTE = "ZZZ_UsuarioFantasma_99999";
 
-    @Test(description = "Flujo E2E: crear empleado en PIM, subir foto y validar en Directory")
+    @Test(description = "Flujo E2E: crear empleado en PIM, subir foto y validar en Directory", priority = 1)
     @Severity(SeverityLevel.CRITICAL)
     @Description("Crea un empleado con foto en el módulo PIM y valida que aparece en el módulo Directory.")
     public void flujoCreacionYValidacionDeEmpleado() {
@@ -43,7 +43,7 @@ public class OrangeHrmE2ETest extends BaseTest {
         directory.validarEmpleadoEnResultados(NOMBRE_EMPLEADO);
     }
 
-    @Test(description = "[Negativo] Buscar un empleado inexistente debe mostrar error en el reporte")
+    @Test(description = "[Negativo] Buscar un empleado inexistente debe mostrar error en el reporte", priority = 2)
     @Severity(SeverityLevel.MINOR)
     @Description("Verifica el comportamiento de Allure ante un fallo: busca un empleado que no existe en el sistema y fuerza la captura de pantalla en el reporte.")
     public void busquedaDeEmpleadoInexistenteDebeFallar() {
