@@ -16,9 +16,8 @@ public class EmployeeDetailsPage {
     private final WebDriverWait espera;
 
     private final By contenedorFoto   = By.cssSelector(".employee-image-wrapper");
-    private final By areaClickFoto    = By.cssSelector(".employee-image-wrapper .emp-picture-cell");
     private final By inputArchivo     = By.cssSelector("input[type='file']");
-    private final By botonGuardarFoto = By.xpath("(//button[@type='button' and normalize-space()='Save'])[last()]");
+    private final By botonGuardarFoto = By.xpath("//button[@type='button' and normalize-space()='Save']");
     private final By mensajeExito     = By.cssSelector(".oxd-toast--success");
 
     public EmployeeDetailsPage() {
@@ -31,11 +30,6 @@ public class EmployeeDetailsPage {
     }
 
     public void subirFoto(String rutaArchivo) {
-        WebElement contenedor = espera.until(
-            ExpectedConditions.elementToBeClickable(contenedorFoto)
-        );
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", contenedor);
-
         WebElement input = espera.until(
             ExpectedConditions.presenceOfElementLocated(inputArchivo)
         );
@@ -45,7 +39,11 @@ public class EmployeeDetailsPage {
         );
         input.sendKeys(rutaArchivo);
 
-        espera.until(ExpectedConditions.elementToBeClickable(botonGuardarFoto)).click();
+        WebElement boton = espera.until(
+            ExpectedConditions.visibilityOfElementLocated(botonGuardarFoto)
+        );
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", boton);
+
         espera.until(ExpectedConditions.visibilityOfElementLocated(mensajeExito));
     }
 }
