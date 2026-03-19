@@ -5,10 +5,9 @@ import com.orangehrm.actions.LoginActions;
 import com.orangehrm.actions.PimActions;
 import com.orangehrm.config.BaseTest;
 import com.orangehrm.config.DriverManager;
-import com.orangehrm.utils.ImageDownloader;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
+import java.io.File;
 
 public class OrangeHrmE2ETest extends BaseTest {
 
@@ -19,7 +18,7 @@ public class OrangeHrmE2ETest extends BaseTest {
     private static final String APELLIDO_EMPLEADO = "Morales" + System.currentTimeMillis();
 
     @Test(description = "Flujo E2E: crear empleado en PIM, subir foto y validar en Directory")
-    public void flujoCreacionYValidacionDeEmpleado() throws IOException {
+    public void flujoCreacionYValidacionDeEmpleado() {
         DriverManager.obtenerDriver().get(URL_BASE);
 
         LoginActions login = new LoginActions();
@@ -29,7 +28,7 @@ public class OrangeHrmE2ETest extends BaseTest {
         pim.navegarAPim();
         pim.crearEmpleado(NOMBRE_EMPLEADO, APELLIDO_EMPLEADO);
 
-        String rutaFoto = ImageDownloader.descargarImagenTemporal();
+        String rutaFoto = new File("src/assets/FOTOPERFIL.png").getAbsolutePath();
         pim.subirFoto(rutaFoto);
 
         DirectoryActions directory = new DirectoryActions();
