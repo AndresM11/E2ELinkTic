@@ -14,10 +14,11 @@ public class PimPage {
     private final WebDriver driver;
     private final WebDriverWait espera;
 
-    private final By botonAgregar  = By.xpath("//button[normalize-space()='Add']");
-    private final By campoNombre   = By.name("firstName");
-    private final By campoApellido = By.name("lastName");
-    private final By botonGuardar  = By.xpath("//button[@type='submit']");
+    private final By botonAgregar     = By.xpath("//button[normalize-space()='Add']");
+    private final By campoNombre       = By.name("firstName");
+    private final By campoApellido     = By.name("lastName");
+    private final By campoIdEmpleado   = By.xpath("//label[contains(normalize-space(),'Employee Id')]/following::input[1]");
+    private final By botonGuardar      = By.xpath("//button[@type='submit']");
 
     public PimPage() {
         this.driver = DriverManager.obtenerDriver();
@@ -38,6 +39,12 @@ public class PimPage {
         WebElement campo = driver.findElement(campoApellido);
         campo.clear();
         campo.sendKeys(apellido);
+    }
+
+    public void ingresarIdEmpleado(String id) {
+        WebElement campo = espera.until(ExpectedConditions.visibilityOfElementLocated(campoIdEmpleado));
+        campo.clear();
+        campo.sendKeys(id);
     }
 
     public void guardarEmpleado() {
