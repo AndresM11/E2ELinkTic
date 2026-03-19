@@ -26,7 +26,9 @@ public class DirectoryPage {
     }
 
     public void buscarPorNombreDeEmpleado(String nombre) {
+        espera.until(ExpectedConditions.urlContains("directory"));
         WebElement campo = espera.until(ExpectedConditions.elementToBeClickable(campoBusqueda));
+        campo.clear();
         campo.sendKeys(nombre);
         WebElement sugerencia = espera.until(
             ExpectedConditions.visibilityOfElementLocated(sugerenciaDropdown)
